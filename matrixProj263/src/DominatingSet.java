@@ -1,4 +1,6 @@
 import java.util.*;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /*
  * CIS263 - Winter 2021 - Project 2
@@ -34,29 +36,41 @@ public class DominatingSet {
 
         //You need to set to 1 the appropriate entries in the array SetAsArray.
         for (int i = 0; i < n; i++) {
-            //if appropriate entry set to 1
-            //if(condition){
-            setAsArray[i] = 1;
-            //}
-            //else{
-            //setAsArray[i] = 0;
-            //}
-        }
-
-        //Write code that multiplies the adjacenyMatrix by the array SetAsArray.
-        //Store the result in the result array
-
-        //If all entries in the array result contain values different from 0, return true
-        //else, if you find any zero return false. 
-        for(int z = 0; z < n; z++) {
-            if(result[z] == 0){
-                return false;
+            //if appropriate entry set to 1 (If the set of labels are valid)
+            if(x.contains(NodeLabel.values()[i])){
+                setAsArray[i] = 1;
             }
             else{
-                return true;
+                //Else set to 0
+                setAsArray[i] = 0;
+            }
+        }
+        //Write code that multiplies the adjacencyMatrix by the array SetAsArray.
+        for(int firstLoop = 0; firstLoop < n; firstLoop++){
+            int product = 0;
+            for(int secondLoop = 0; secondLoop < n; secondLoop++){
+                int temp = setAsArray[secondLoop];
+                int temp2 = adjacencyMatrix[firstLoop][secondLoop];
+                product = product + (temp * temp2);
+            }
+            //store the result in the result array
+            result[firstLoop] = product;
+        }
+
+        //If all entries in the array result contain values different from 0, return true
+        //else, if you find any zero return false.
+
+        boolean isDominating = true;
+        for (int i : result) {
+            if (i == 0) {
+                isDominating = false;
+                return isDominating;
+            } else {
+                isDominating = true;
             }
         }
 
+    return isDominating;
     }
 
     public static void main(String args[]) {
