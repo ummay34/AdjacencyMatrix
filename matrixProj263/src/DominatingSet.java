@@ -3,13 +3,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /*
- * CIS263 - Winter 2021 - Project 2
  * Find the smallest dominating set for an undirected graph.
- * More information about Dominating Sets can be found at:
- * https://mathworld.wolfram.com/DominatingSet.html
- * https://mathworld.wolfram.com/MinimumDominatingSet.html
- * https://en.wikipedia.org/wiki/Dominating_set
- *
  * This code reads, from the standard input, the graph that contains:
  * n the number of nodes in the graph
  * the adjacency matrix for the graph
@@ -27,7 +21,6 @@ public class DominatingSet {
 
     /* Return true if the SetOfLabels x is
      * a subset that is a dominating set.
-     * Your code goes here.
      */
     private static boolean isDominatingSet(SetOfLabels x) {
         //Declare two arrays of integers of size n
@@ -51,6 +44,7 @@ public class DominatingSet {
             for(int secondLoop = 0; secondLoop < n; secondLoop++){
                 int temp = setAsArray[secondLoop];
                 int temp2 = adjacencyMatrix[firstLoop][secondLoop];
+                //Multiplies adjacencyMatrix by setArray and stores it in product
                 product = product + (temp * temp2);
             }
             //store the result in the result array
@@ -59,7 +53,6 @@ public class DominatingSet {
 
         //If all entries in the array result contain values different from 0, return true
         //else, if you find any zero return false.
-
         boolean isDominating = true;
         for (int i : result) {
             if (i == 0) {
@@ -69,7 +62,7 @@ public class DominatingSet {
                 isDominating = true;
             }
         }
-
+    //return boolean value
     return isDominating;
     }
 
